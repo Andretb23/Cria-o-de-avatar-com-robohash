@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gerador de Avatares Robohash</title>
+    <style>
+        /* Estilos CSS */
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh; /* Alterado de height para min-height */
+        }
+
+        h1 {
+            margin: 20px 0;
+        }
+
+        input {
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px 10px;
+        }
+
+        #avatarContainer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .avatar {
+            margin: 10px;
+        }
+
+        /* Estilos para a seção de documentação */
+        .documentation-section {
+            background-color: #f0f0f0;
+            color: #050404;
+            padding: 15px;
+            text-align: center;
+            width: 100%; /* Garante que a seção ocupe toda a largura */
+        }
+    </style>
+</head>
+<body>
+    <h1>Gerador de Avatares Robohash</h1>
+    <input type="text" id="inputText" placeholder="Digite um nome ou e-mail">   
+    <button id="generateAvatar">Gerar Avatar</button>
+    <button id="generateRobot">Gerar Robô</button>
+    <button id="generateMonster">Gerar Monstro</button>
+    <div id="avatarContainer"></div>
+
+    <!-- Seção de documentação -->
+    <div class="documentation-section">
+        <div class="container">
+            <h2>API RoboHash</h2>
+            <p>Gerador de avatares RoboHash. API tem como objetivo criar avatares e personagens com base no que voce digitar no campo de pesquisa podendo ser seu IP, Nome e etc.</p>
+            <p>Cada avatar é unico da palavra escolhida, para documentação e so clicar no link abaixo</p>
+            <a href="https://robohash.org/api/" target="_blank">Documentação da API</a>
+        </div>
+    </div>
+
+    <script>
+        const generateAvatar = (input) => `https://robohash.org/${input}.png?set=set1&bgset=bg1&size=200x200`;
+        const generateMonster = (input) => `https://robohash.org/${input}.png?set=set2&bgset=bg2&size=200x200`;
+        const generateRobot = (input) => `https://robohash.org/${input}.png?set=set3&bgset=bg3&size=200x200`;
+
+        document.getElementById('generateAvatar').addEventListener('click', () => {
+            const inputText = document.getElementById('inputText').value.trim();
+            if (inputText) {
+                const avatarUrl = generateAvatar(inputText);
+                addAvatar(avatarUrl);
+            }
+        });
+
+        document.getElementById('generateRobot').addEventListener('click', () => {
+            const inputText = document.getElementById('inputText').value.trim();
+            if (inputText) {
+                const avatarUrl = generateRobot(inputText);
+                addAvatar(avatarUrl);
+            }
+        });
+
+        document.getElementById('generateMonster').addEventListener('click', () => {
+            const inputText = document.getElementById('inputText').value.trim();
+            if (inputText) {
+                const avatarUrl = generateMonster(inputText);
+                addAvatar(avatarUrl);
+            }
+        });
+
+        const addAvatar = (url) => {
+            const avatarContainer = document.getElementById('avatarContainer');
+            const avatarElement = document.createElement('img');
+            avatarElement.src = url;
+            avatarElement.className = 'avatar';
+            avatarContainer.appendChild(avatarElement);
+        };
+    </script>
+</body>
+</html>
